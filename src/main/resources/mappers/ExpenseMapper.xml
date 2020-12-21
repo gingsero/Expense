@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Expense.mapper.ExpenseMapper">
+<resultMap type="Expense" id="resExpense">
+</resultMap>
+	<sql id="selectSQL">
+		select expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt, process_date, remark 
+		from expense
+	</sql>
+	
+	<select id="SelectExpenseByAll" resultType="Expense.dto.Expense">
+		<include refid="selectSQL"/>
+	</select>
+</mapper>
