@@ -1,6 +1,6 @@
 drop table expense;
 create table expense(
-	expense_no	integer not null primary key,	-- 순번
+	expense_no	number(6) not null primary key,	-- 순번
 	use_date timestamp,								--사용일
 	name varchar(50),							-- 사용내역
 	use_price varchar(30),						-- 사용금액
@@ -18,6 +18,12 @@ create sequence expense_seq
 	minvalue 01;
 
 INSERT INTO expense values(expense_seq.nextval, '2019-12-24', '식대(야근)', '8000', '7000', '승인', '2019-12-26', '영수증1.jpg', '2019-12-31 14:00', '야근식대는 7천원까지 지원됩니다.');	
+INSERT INTO expense values(expense_seq.nextval, '2019-12-20', '택시비(야근)', '15000', null, '접수', '2019-12-21', '영수증2.jpg', '2019-12-31 15:00', '택시비 지원은 1만원까지 지원됩니다.');	
 	
 select expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt, process_date, remark 
-from expense;
+from expense order by expense_no desc;
+
+select expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt, process_date, remark 
+from expense where process_status='승인' order by expense_no desc;
+
+select count(expense_no) from EXPENSE;

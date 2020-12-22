@@ -1,4 +1,4 @@
-package Expense.mapper;
+package Expense.service;
 
 import java.util.List;
 
@@ -14,14 +14,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import Expense.config.ControllerConfig;
 import Expense.dto.Expense;
+import Expense.service.ExpenseService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ControllerConfig.class})
-public class ExpenseMapperTest {
-	protected static final Log log = LogFactory.getLog(ExpenseMapperTest.class);
+public class ExpenseServiceTest {
+	protected static final Log log = LogFactory.getLog(ExpenseServiceTest.class);
 	
 	@Autowired
-	private ExpenseMapper mapper;
+	private ExpenseService service;
 	
 	@After
 	public void tearDown() throws Exception{
@@ -29,10 +30,10 @@ public class ExpenseMapperTest {
 	}
 
 	@Test
-	public void testSelectExpenseByAll() {
+	public void testGetList() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
 		
-		List<Expense> list = mapper.SelectExpenseByAll();
+		List<Expense> list = service.getList();
 		Assert.assertNotNull(list);
 		list.forEach(Expense -> log.debug(Expense.toString()));
 	}

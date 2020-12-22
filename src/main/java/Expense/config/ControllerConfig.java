@@ -6,11 +6,9 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({ContextDataSource.class, ContextSqlSession.class})
-@ComponentScan(basePackages = {"Expense.mapper"})
+@ComponentScan(basePackages = {"Expense.mapper", 
+								"Expense.service",
+								"Expense.controller"})
 public class ControllerConfig {
 
 }
-/*
- * "Expense.config.mapper", "Expense.config.service",
- * "Expense.config.controller"
- */
