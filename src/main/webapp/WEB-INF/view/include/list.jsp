@@ -70,15 +70,6 @@ $(function(){
 	</thead>
 	<tbody id="load">
 	</tbody>
-	<!-- <tr>
-		<td><b>합계</b></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr> -->
 </table>
 </body>
 </html>
