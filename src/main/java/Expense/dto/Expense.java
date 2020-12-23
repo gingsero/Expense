@@ -16,7 +16,6 @@ public class Expense {
 	
 	public Expense() {}
 
-
 	public Expense(int expense_no, Timestamp use_date, String name, String use_price, String approve_price,
 			String process_status, Timestamp registration_date, String receipt, Timestamp process_date, String remark) {
 		super();
@@ -31,7 +30,6 @@ public class Expense {
 		this.process_date = process_date;
 		this.remark = remark;
 	}
-
 
 	public int getExpense_no() {
 		return expense_no;
@@ -120,6 +118,10 @@ public class Expense {
 				expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt,
 				process_date, remark);
 	}
+
+	
+
+
 
 
 	

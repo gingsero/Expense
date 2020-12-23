@@ -13,12 +13,9 @@ $(function(){
 	$('#search').on("click", function(e){
 		e.preventDefault();
 		var data = {
-				/* registrationDate : $('#registrationDate').val(),
+				date : $('#registrationDate').val(),
 				name : $('#name').val(),
-				processStatus : $('#processStatus').val() */
-				"date" : $('#registrationDate').val(),
-				"name" : $('#name').val(),
-				"processStatus" : $('#processStatus').val()
+				process_status : $('#process_status').val()
 		};
 		if(document.getElementById("registrationDate").value == 0) {
 			alert("등록년월을 선택해주세요");
@@ -30,34 +27,32 @@ $(function(){
 			document.getElementById("name").focus();
 			return false;
 		}
-		if(document.getElementById("processStatus").value == 0) {
+		if(document.getElementById("process_status").value == 0) {
 			alert("처리상태를 선택해주세요");
-			document.getElementById("processStatus").focus();
+			document.getElementById("process_status").focus();
 			return false;
 		}
-	/* alert("data > " + data.registrationDate + ", " + data.name + ", " + data.processStatus) */
-	alert("data > " + data.date + " " + data.name + " " + data.processStatus)
-	
-	var params = "date=" + encodeURIComponent(data.registrationDate) + "&name=" + data.name + "&processStatus=" + data.processStatus;
-	$.ajax({
-		/* url : contextPath + "/api/getList/{use_date, name, process_status}", */
-		/* url : "/api/getList?date=data.registrationDate&name=data.name&process_status=data.processStatus}", */
-		/* url : "/api/getList?" + params, */
-		url : "/api/getList",
-		type : 'GET',
-		contentType : "application/json; charset=utf-8",
-		dataType : data,//'JSON',
-		cache : false,
-		data : JSON.stringify(data),
-		success : function(res){
-			alert(res);
-			window.location.href=contextPath + "/index";
-		},
-		error : function(request, status, error){
-			alert("code : " + request.status + "\n"+"message : " + request.responseText + "\n"+"error : " + error);
-			/* window.location.href=contextPath + "/index"; */
-		}
-	});
+		 alert("data > " + data.date + ", " + data.name + ", " + data.process_status)
+		console.log("data > " + data.date + " " + data.name + " " + data.process_status)
+		
+		$.ajax({
+			url : "/api/getList", 
+			type : 'GET',
+			contentType : "application/json; charset=utf-8",
+			dataType : 'JSON',
+			// processDate : false,
+			cache : false,
+			data : data, //JSON.stringify(data)
+			success : function(res){
+				alert("결과 값 >> " + res);
+				console.log(res);
+				window.location.href=contextPath + "/search";
+			},
+			error : function(request, status, error){
+				alert("code : " + request.status + "\n"+"message : " + request.responseText + "\n"+"error : " + error);
+				 window.location.href=contextPath + "/index";
+			}
+		});
 	});
 });
 
@@ -81,7 +76,7 @@ $(function(){
 			</select>
 	
 	<a class="class3">처리상태:</a>
-		<select name="processStatus" id="processStatus">
+		<select name="process_status" id="process_status">
 		  	<option value="" selected> 선택</option>
 			<option value="접수">접수</option>
 			<option value="승인">승인</option>

@@ -15,8 +15,14 @@ $(function(){
 	document.getElementById("registrationDate").value = new Date().toISOString().substring(0,10);	//현재 날짜를 기본값으로
 	
 	var contextPath = "<%=request.getContextPath()%>";
+	var params = {
+			date : ${param.date}
+			name : ${param.name}
+			process_status : ${param.process_status}
+	}
+	alert("data > " + data.date + ", " + data.name + ", " + data.process_status)
 	
-	$.get(contextPath+"/api/list", function(json){
+	$.get(contextPath+"/api/getList"+params, function(json){
 		var dataLength = json.length;
 		//alert("list >> " + json);
 		if(dataLength >= 1){
@@ -42,7 +48,7 @@ $(function(){
 			$("#load:last-child").append(sCont);
 		}
 	});
-
+ 
 });
 </script>
 </head>

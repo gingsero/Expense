@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Expense.mapper.ExpenseMapper">
-<resultMap type="Expense" id="resExpense">
-	<id column="expense_no" property="expense_no"/>
-	<result column="use_date" property="use_date"/>
-	<result column="name" property="name"/>
-	<result column="use_price" property="use_price"/>
-	<result column="approve_price" property="approve_price"/>
-	<result column="process_status" property="process_status"/>
-	<result column="registration_date" property="registration_date"/>
-	<result column="receipt" property="receipt"/>
-	<result column="process_date" property="process_date"/>
-	<result column="remark" property="remark"/>
-</resultMap>
+	<resultMap type="Expense.dto.Expense" id="resExpense">
+		<id column="expense_no" property="expense_no"/>
+		<result column="use_date" property="use_date"/>
+		<result column="name" property="name"/>
+		<result column="use_price" property="use_price"/>
+		<result column="approve_price" property="approve_price"/>
+		<result column="process_status" property="process_status"/>
+		<result column="registration_date" property="registration_date"/>
+		<result column="receipt" property="receipt"/>
+		<result column="process_date" property="process_date"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	
 	<sql id="selectSQL">
-		select expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt, process_date, remark 
-		from expense order by expense_no desc
+		select expense_no
+			, use_date, name
+			, use_price
+			, approve_price
+			, process_status
+			, registration_date
+			, receipt
+			, process_date
+			, remark 
+		from expense
 	</sql>
 	
 	<sql id="whereSQL">
 		<where>
 			<if test = "process_status !=null">
-					process_status = #{process_status}
+				AND process_status = #{process_status}
 			</if>
 			<if test = "name != null">
-				name = #{name}				
+				AND name = #{name}				
 			</if>
 			<if test = "expense_no !=null">
-				expense_no = #{expense_no}
+				AND expense_no = #{expense_no}
 			</if>
+			 order by expense_no desc
 		</where>
 	</sql>
 	
 	<select id="SelectExpenseByAll" resultMap="resExpense">
 		<include refid="selectSQL"/>
+		order by expense_no desc
 	</select>
 	
 	<select id="countTotal" resultType="int">
 		select count(expense_no) from EXPENSE
 	</select>
 	
-	<select id="selectExpenseByProcess" resultMap="resExpense" >
+	<select id="selectExpenseByProcess" resultMap="resExpense" parameterType="hashmap" >
 		<include refid="selectSQL"/>
 		<include refid="whereSQL"/>
 	</select>

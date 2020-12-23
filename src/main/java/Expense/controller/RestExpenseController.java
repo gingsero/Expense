@@ -1,14 +1,18 @@
 package Expense.controller;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Expense.dto.Expense;
@@ -23,7 +27,7 @@ public class RestExpenseController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<Object> Expense(){
-		System.out.println("Expense()");
+		System.out.println("Expense() index");
 		return ResponseEntity.ok(service.getList());
 	}
 
@@ -39,11 +43,18 @@ public class RestExpenseController {
 	 */
 	
 	@GetMapping("/getList")
-	public ResponseEntity<Object> getExpense(@RequestParam("date") Timestamp use_date, @RequestParam("name") String name , @RequestParam("processStatus") String process_status){
-//	public ResponseEntity<Object> getExpense(@RequestParam("date") String use_date, @RequestParam("name") String name, @RequestParam("processStatus") String process_status){
-		// TODO use_date에 Timestamp로 매핑될 수 있는지 확인, 안되면 String으로 받아서 new Date형탤 casting 해줘야된다
-		System.out.println("getExpense() : " + use_date + ", " + name + ", " + process_status);
-		List<Expense> expense = service.getProcessList(use_date, name, process_status);
+	public ResponseEntity<Object> getExpense(@RequestParam Map<String, Object> params) {
+		System.out.println("getExpense() : " + params.toString() + ", " + params.get("date"));
+		
+		Timestamp dateToTimestamp = Timestamp.valueOf((String)params.get("date") + " 00:00:00");
+		
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("date", dateToTimestamp);
+		paramMap.put("name", params.get("name"));
+		paramMap.put("processStatus", params.get("process_status"));
+		
+		List<Expense> expense = service.getProcessList(paramMap);
+		
 		if(expense == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
