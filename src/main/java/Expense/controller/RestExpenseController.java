@@ -27,9 +27,10 @@ public class RestExpenseController {
 		return ResponseEntity.ok(service.getList());
 	}
 
-	@GetMapping("/getList/{use_date, name, process_status}")
-	public ResponseEntity<Object> getExpense(@RequestParam Timestamp use_date, @RequestParam String name, @RequestParam String process_status){
-		System.out.println("getExpense()");
+	@GetMapping("/getList")
+	public ResponseEntity<Object> getExpense(@RequestParam("date") Timestamp use_date, @RequestParam("name") String name, @RequestParam("process_status") String process_status){
+		// TODO use_date에 Timestamp로 매핑될 수 있는지 확인, 안되면 String으로 받아서 new Date형탤 casting 해줘야된다
+		System.out.println("getExpense() : " + name + ", " + process_status) ;
 		List<Expense> expense = service.getProcessList(use_date, name, process_status);
 		if(expense == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
