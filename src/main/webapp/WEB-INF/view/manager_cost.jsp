@@ -34,15 +34,15 @@ $(function(){
 		}
 	alert("data > " + data.registrationDate + " " + data.name + " " + data.processStatus)
 
-	
+	var params = "date=" + encodeURIComponent(data.registrationDate) + "&name=" + data.name + "&processStatus=" + data.processStatus;
 	$.ajax({
 		/* url : contextPath + "/api/getList/{use_date, name, process_status}", */
-		url : "/api/getList?date=data.registrationDate&name=data.name&process_status=data.processStatus}",
+		url : "/api/getList?" + params,
 		type : 'GET',
-		contentType : "application/json; charset=utf-8",
+		//contentType : "application/json; charset=utf-8",
 		dataType : 'JSON',
 		cache : false,
-		data : JSON.stringify(data),
+		//data : JSON.stringify(data),
 		success : function(res){
 			alert(res);
 			window.location.href=contextPath + "/index";
