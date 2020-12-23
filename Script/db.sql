@@ -1,4 +1,7 @@
+--삭제
 drop table expense;
+drop sequence expense_seq;
+
 create table expense(
 	expense_no	number(6) not null primary key,	-- 순번
 	use_date timestamp,								--사용일
@@ -24,6 +27,6 @@ select expense_no, use_date, name, use_price, approve_price, process_status, reg
 from expense order by expense_no desc;
 
 select expense_no, use_date, name, use_price, approve_price, process_status, registration_date, receipt, process_date, remark 
-from expense where process_status='승인' order by expense_no desc;
+from expense where use_date='2019-12-24' and process_status='승인' and name='식대(야근)' order by expense_no desc;
 
 select count(expense_no) from EXPENSE;

@@ -14,14 +14,11 @@ $(function(){
 	<%-- <%SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");%> --%>
 	document.getElementById("registrationDate").value = new Date().toISOString().substring(0,10);	//현재 날짜를 기본값으로
 	
-	
-	
-	
 	var contextPath = "<%=request.getContextPath()%>";
 	
 	$.get(contextPath+"/api/list", function(json){
 		var dataLength = json.length;
-		alert(json);
+		alert("list >> " + json);
 		if(dataLength >= 1){
 			var sCont = "";
 			for(i=0; i<dataLength; i++){
@@ -42,38 +39,13 @@ $(function(){
 		}
 	});
 	
+
 	
 });
 </script>
 </head>
 <body>
-<form action='' method='get'>
-	<a class="class1">등록년월:</a>
-		<input name='registrationDate' type='date' id="registrationDate">
-			
-	<a class="class2">사용내역:</a>
-			<select name="name">
-		  		<option value="" selected> 선택</option>
-    			<option value="식대(야근)">식대(야근)</option>
-			    <option value="택시비(야근)">택시비(야근)</option>
-			    <option value="택시비(회식)">택시비(회식)</option>
-			    <option value="사무용품구매">사무용품구매</option>
-    			<option value="교육비">교육비</option>
-   			    <option value="접대비">접대비</option>
-			</select>
-	
-	<a class="class3">처리상태:</a>
-		<select name="processStatus">
-		  	<option value="" selected> 선택</option>
-			<option value="접수">접수</option>
-			<option value="승인">승인</option>
-		    <option value="지급완료">지급완료</option>
-    		<option value="반려">반려</option>
-		</select>
-	
-	<input type="reset" value="초기화" style="margin-left: 120px;">
-	<input type="button" value="검색" onclick="return()false;">
-</form>
+
 
 <br>
 

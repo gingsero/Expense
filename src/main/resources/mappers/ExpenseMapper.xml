@@ -23,6 +23,12 @@
 			<if test = "process_status !=null">
 					process_status = #{process_status}
 			</if>
+			<if test = "name != null">
+				name = #{name}				
+			</if>
+			<if test = "expense_no !=null">
+				expense_no = #{expense_no}
+			</if>
 		</where>
 	</sql>
 	
