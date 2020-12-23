@@ -13,9 +13,12 @@ $(function(){
 	$('#search').on("click", function(e){
 		e.preventDefault();
 		var data = {
-				registrationDate : $('#registrationDate').val(),
+				/* registrationDate : $('#registrationDate').val(),
 				name : $('#name').val(),
-				processStatus : $('#processStatus').val()
+				processStatus : $('#processStatus').val() */
+				"date" : $('#registrationDate').val(),
+				"name" : $('#name').val(),
+				"processStatus" : $('#processStatus').val()
 		};
 		if(document.getElementById("registrationDate").value == 0) {
 			alert("등록년월을 선택해주세요");
@@ -32,16 +35,18 @@ $(function(){
 			document.getElementById("processStatus").focus();
 			return false;
 		}
-	alert("data > " + data.registrationDate + ", " + data.name + ", " + data.processStatus)
-
+	/* alert("data > " + data.registrationDate + ", " + data.name + ", " + data.processStatus) */
+	alert("data > " + data.date + " " + data.name + " " + data.processStatus)
+	
 	var params = "date=" + encodeURIComponent(data.registrationDate) + "&name=" + data.name + "&processStatus=" + data.processStatus;
 	$.ajax({
 		/* url : contextPath + "/api/getList/{use_date, name, process_status}", */
 		/* url : "/api/getList?date=data.registrationDate&name=data.name&process_status=data.processStatus}", */
-		url : "/api/getList?" + params,
+		/* url : "/api/getList?" + params, */
+		url : "/api/getList",
 		type : 'GET',
 		contentType : "application/json; charset=utf-8",
-		dataType : 'JSON',
+		dataType : data,//'JSON',
 		cache : false,
 		data : JSON.stringify(data),
 		success : function(res){

@@ -35,6 +35,10 @@ $(function(){
 				sCont += "<td>" + json[i].remark + "</td>"; */
 				sCont += "</tr>"; 
 			}
+			/* sCont += "<tr>";
+			sCont += "<td></td>";
+			sCont += "<td></td>";
+			sCont += "<td></td>"; */
 			$("#load:last-child").append(sCont);
 		}
 	});
